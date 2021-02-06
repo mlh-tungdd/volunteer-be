@@ -25,4 +25,28 @@ class Contact extends Model
         'phone',
         'fullname',
     ];
+
+    /**
+     * Relationship
+     */
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    /**
+     * response
+     *
+     */
+    public function getContactResponse()
+    {
+        return [
+            'id' => $this->id,
+            'content' => $this->content,
+            'email' => $this->email,
+            'phone' => $this->phone,
+            'fullname' => $this->fullname,
+            'user_name' => $this->users->fullname ?? null,
+        ];
+    }
 }

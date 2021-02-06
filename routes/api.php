@@ -65,6 +65,22 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('/schools/{id}', 'SchoolController@show');
         Route::post('/schools/{id}', 'SchoolController@update');
 
+        // albums
+        Route::get('/albums', 'AlbumController@index');
+        Route::get('/albums/all_album', 'AlbumController@all');
+        Route::post('/albums', 'AlbumController@store');
+        Route::get('/albums/delete/{id}', 'AlbumController@destroy');
+        Route::get('/albums/{id}', 'AlbumController@show');
+        Route::post('/albums/{id}', 'AlbumController@update');
+
+        // video
+        Route::get('/videos', 'VideoController@index');
+        Route::get('/videos/all_video', 'VideoController@all');
+        Route::post('/videos', 'VideoController@store');
+        Route::get('/videos/delete/{id}', 'VideoController@destroy');
+        Route::get('/videos/{id}', 'VideoController@show');
+        Route::post('/videos/{id}', 'VideoController@update');
+
         // user profile
         Route::get('/user/show_profile', 'UserController@showProfile');
         Route::post('/user/edit_profile', 'UserController@editProfile');

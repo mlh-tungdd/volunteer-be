@@ -42,6 +42,16 @@ class AppServiceProvider extends ServiceProvider
             \App\Services\SchoolServiceInterface::class,
             \App\Services\SchoolService::class
         );
+
+        $this->app->singleton(
+            \App\Services\AlbumServiceInterface::class,
+            \App\Services\AlbumService::class
+        );
+
+        $this->app->singleton(
+            \App\Services\VideoServiceInterface::class,
+            \App\Services\VideoService::class
+        );
     }
 
     /**

@@ -29,6 +29,9 @@ class News extends Model
         'views',
     ];
 
+    /**
+     * Relationship
+     */
     public function categoryNews()
     {
         return $this->belongsTo(CategoryNews::class, 'category_id');

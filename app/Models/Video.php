@@ -23,4 +23,18 @@ class Video extends Model
         'url',
         'thumbnail',
     ];
+
+    /**
+     * response
+     *
+     */
+    public function getVideoResponse()
+    {
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'url' => $this->url,
+            'thumbnail' => $this->thumbnail,
+        ];
+    }
 }

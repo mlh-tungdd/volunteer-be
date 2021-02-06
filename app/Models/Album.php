@@ -24,4 +24,28 @@ class Album extends Model
         'content',
         'category_album_id',
     ];
+
+    /**
+     * Relationship
+     */
+    public function categoryAlbum()
+    {
+        return $this->belongsTo(CategoryAlbum::class, 'category_album_id');
+    }
+
+    /**
+     * response
+     *
+     */
+    public function getAlbumResponse()
+    {
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'description' => $this->description,
+            'content' => $this->content,
+            'category_album_id' => $this->category_album_id,
+            'category_name' => $this->categoryAlbum->title ?? null,
+        ];
+    }
 }
