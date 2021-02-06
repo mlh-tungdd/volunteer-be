@@ -37,6 +37,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Services\NewsServiceInterface::class,
             \App\Services\NewsService::class
         );
+
+        $this->app->singleton(
+            \App\Services\SchoolServiceInterface::class,
+            \App\Services\SchoolService::class
+        );
     }
 
     /**

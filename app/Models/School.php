@@ -25,4 +25,20 @@ class School extends Model
         'address',
         'views',
     ];
+
+    /**
+     * response
+     *
+     */
+    public function getSchoolResponse()
+    {
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'description' => $this->description,
+            'content' => $this->content,
+            'address' => $this->address,
+            'views' => $this->views,
+        ];
+    }
 }
