@@ -33,6 +33,30 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('/banners/{id}', 'BannerController@show');
         Route::post('/banners/{id}', 'BannerController@update');
 
+        // category_news
+        Route::get('/category_news', 'CategoryNewsController@index');
+        Route::get('/category_news/all_category_news', 'CategoryNewsController@all');
+        Route::post('/category_news', 'CategoryNewsController@store');
+        Route::get('/category_news/delete/{id}', 'CategoryNewsController@destroy');
+        Route::get('/category_news/{id}', 'CategoryNewsController@show');
+        Route::post('/category_news/{id}', 'CategoryNewsController@update');
+
+        // category_album
+        Route::get('/category_album', 'CategoryAlbumController@index');
+        Route::get('/category_album/all_category_album', 'CategoryAlbumController@all');
+        Route::post('/category_album', 'CategoryAlbumController@store');
+        Route::get('/category_album/delete/{id}', 'CategoryAlbumController@destroy');
+        Route::get('/category_album/{id}', 'CategoryAlbumController@show');
+        Route::post('/category_album/{id}', 'CategoryAlbumController@update');
+
+        // news
+        Route::get('/news', 'NewsController@index');
+        Route::get('/news/all_news', 'NewsController@all');
+        Route::post('/news', 'NewsController@store');
+        Route::get('/news/delete/{id}', 'NewsController@destroy');
+        Route::get('/news/{id}', 'NewsController@show');
+        Route::post('/news/{id}', 'NewsController@update');
+
         // user profile
         Route::get('/user/show_profile', 'UserController@showProfile');
         Route::post('/user/edit_profile', 'UserController@editProfile');

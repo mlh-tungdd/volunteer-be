@@ -22,6 +22,21 @@ class AppServiceProvider extends ServiceProvider
             \App\Services\BannerServiceInterface::class,
             \App\Services\BannerService::class
         );
+
+        $this->app->singleton(
+            \App\Services\CategoryNewsServiceInterface::class,
+            \App\Services\CategoryNewsService::class
+        );
+
+        $this->app->singleton(
+            \App\Services\CategoryAlbumServiceInterface::class,
+            \App\Services\CategoryAlbumService::class
+        );
+
+        $this->app->singleton(
+            \App\Services\NewsServiceInterface::class,
+            \App\Services\NewsService::class
+        );
     }
 
     /**

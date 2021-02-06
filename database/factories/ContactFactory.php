@@ -2,18 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
+use App\Models\Contact;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
-class UserFactory extends Factory
+class ContactFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = User::class;
+    protected $model = Contact::class;
 
     /**
      * Define the model's default state.
@@ -22,14 +21,13 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $users = \App\Models\User::get()->pluck('id')->toArray();
         return [
-            'fullname' => $this->faker->name,
-            'username' => $this->faker->userName,
+            'content' => $this->faker->text(200),
             'email' => $this->faker->email,
             'phone' => $this->faker->phoneNumber,
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'remember_token' => Str::random(10),
-            'permission' => 1
+            'fullname' => $this->faker->name,
+            'user_id' => $this->faker->randomElement($users),
         ];
     }
 }
