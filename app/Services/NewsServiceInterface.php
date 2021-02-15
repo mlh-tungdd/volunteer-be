@@ -15,4 +15,8 @@ interface NewsServiceInterface
     public function showNews($id);
 
     public function updateNews($params);
+
+    public function getListNewsRecent($categoryId);
+
+    public function getListNewsByCategoryId($categoryId);
 }

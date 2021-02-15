@@ -19,6 +19,19 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('/auth/login', 'AuthController@login');
     Route::post('/auth/logout', 'AuthController@logout');
 
+    Route::get('/banners', 'BannerController@index');
+    Route::get('/banners/all_banner', 'BannerController@all');
+
+    Route::get('/category_news', 'CategoryNewsController@index');
+    Route::get('/category_news/all_category_news', 'CategoryNewsController@all');
+    Route::get('/category_news/{id}', 'CategoryNewsController@show');
+
+    Route::get('/news', 'NewsController@index');
+    Route::get('/news/all_news', 'NewsController@all');
+    Route::get('/news/{id}', 'NewsController@show');
+    Route::get('/news/get_list_recent/{id}', 'NewsController@getListNewsRecent');
+    Route::get('/news/get_list_by_category_id/{id}', 'NewsController@getListNewsByCategoryId');
+
     Route::group(['middleware' => 'jwt.auth',], function () {
         // user
         Route::get('/user/list', 'UserController@getList');
@@ -26,19 +39,14 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('/user/info', 'UserController@showProfile');
 
         // banner
-        Route::get('/banners', 'BannerController@index');
-        Route::get('/banners/all_banner', 'BannerController@all');
         Route::post('/banners', 'BannerController@store');
         Route::get('/banners/delete/{id}', 'BannerController@destroy');
         Route::get('/banners/{id}', 'BannerController@show');
         Route::post('/banners/{id}', 'BannerController@update');
 
         // category_news
-        Route::get('/category_news', 'CategoryNewsController@index');
-        Route::get('/category_news/all_category_news', 'CategoryNewsController@all');
         Route::post('/category_news', 'CategoryNewsController@store');
         Route::get('/category_news/delete/{id}', 'CategoryNewsController@destroy');
-        Route::get('/category_news/{id}', 'CategoryNewsController@show');
         Route::post('/category_news/{id}', 'CategoryNewsController@update');
 
         // category_album
@@ -50,11 +58,8 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('/category_album/{id}', 'CategoryAlbumController@update');
 
         // news
-        Route::get('/news', 'NewsController@index');
-        Route::get('/news/all_news', 'NewsController@all');
         Route::post('/news', 'NewsController@store');
         Route::get('/news/delete/{id}', 'NewsController@destroy');
-        Route::get('/news/{id}', 'NewsController@show');
         Route::post('/news/{id}', 'NewsController@update');
 
         // school

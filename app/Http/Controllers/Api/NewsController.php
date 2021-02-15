@@ -148,4 +148,22 @@ class NewsController extends ApiController
             return $this->response->errorWrongArgs($ex->getMessage());
         }
     }
+
+    /**
+     * Get news recent
+     */
+    public function getListNewsRecent($categoryId)
+    {
+        $list = $this->newsService->getListNewsRecent($categoryId);
+        return $this->response->withData($list);
+    }
+
+    /**
+     * Get news by category_id
+     */
+    public function getListNewsByCategoryId($categoryId)
+    {
+        $list = $this->newsService->getListNewsByCategoryId($categoryId);
+        return $this->response->withData($list);
+    }
 }

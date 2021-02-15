@@ -24,8 +24,8 @@ class SettingFactory extends Factory
         return [
             'description' => $this->faker->text(200),
             'content' => $this->faker->text(200),
-            'favicon' => $this->faker->imageUrl($width = 640, $height = 400, 'cats', true, 'Faker', true),
-            'logo' => $this->faker->imageUrl($width = 640, $height = 400, 'cats', true, 'Faker', true),
+            'favicon' => 'https://fakeimg.pl/700x400/?text=' . $this->faker->word,
+            'logo' => 'https://fakeimg.pl/700x400/?text=' . $this->faker->word,
             'address' => $this->faker->address,
             'hotline' => $this->faker->phoneNumber,
             'email' => $this->faker->email

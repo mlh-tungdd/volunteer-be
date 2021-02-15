@@ -3,14 +3,17 @@
 namespace App\Services;
 
 use App\Models\News;
+use App\Models\CategoryNews;
 
 class NewsService implements NewsServiceInterface
 {
     protected $news;
+    protected $categoryNews;
 
-    public function __construct(News $news)
+    public function __construct(News $news, CategoryNews $categoryNews)
     {
         $this->news = $news;
+        $this->categoryNews = $categoryNews;
     }
 
     /**
@@ -83,7 +86,7 @@ class NewsService implements NewsServiceInterface
      */
     public function showNews($id)
     {
-        return $this->news->findOrFail($id);
+        return $this->news->findOrFail($id)->getNewsResponse();
     }
 
     /**
@@ -95,5 +98,38 @@ class NewsService implements NewsServiceInterface
     public function updateNews($params)
     {
         $this->news->findOrFail($params['id'])->update($params);
+    }
+
+    /**
+     * get news recent
+     *
+     * @return void
+     */
+    public function getListNewsRecent($categoryId)
+    {
+        $query = $this->news->where('category_id', $categoryId)->orderByDesc('created_at');
+        return $query->get()->map(function ($item) {
+            return $item->getNewsResponse();
+        });
+    }
+
+    /**
+     * get list by category_id
+     *
+     * @return void
+     */
+    public function getListNewsByCategoryId($categoryId)
+    {
+        $query = $this->news->with(['categoryNews'])->where('category_id', $categoryId)->orderByDesc('created_at')->paginate();
+        return [
+            'data' => $query->map(function ($item) {
+                return $item->getNewsResponse();
+            }),
+            'per_page' => $query->perPage(),
+            'total' => $query->total(),
+            'current_page' => $query->currentPage(),
+            'last_page' => $query->lastPage(),
+            'category' => $this->categoryNews->findOrFail($categoryId)
+        ];
     }
 }

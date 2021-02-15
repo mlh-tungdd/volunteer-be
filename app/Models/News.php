@@ -54,6 +54,7 @@ class News extends Model
             'category_id' => $this->category_id,
             'views' => $this->views,
             'category_name' => $this->categoryNews->title ?? null,
+            'created_at' => $this->created_at
         ];
     }
 }

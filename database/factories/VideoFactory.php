@@ -24,7 +24,7 @@ class VideoFactory extends Factory
         return [
             'title' => $this->faker->sentence(6, true),
             'url' => $this->faker->url,
-            'thumbnail' => $this->faker->imageUrl($width = 640, $height = 400, 'cats', true, 'Faker', true),
+            'thumbnail' => 'https://fakeimg.pl/700x400/?text=' . $this->faker->word,
         ];
     }
 }
