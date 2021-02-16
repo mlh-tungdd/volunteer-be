@@ -32,6 +32,10 @@ Route::group(['namespace' => 'Api'], function () {
     Route::get('/news/get_list_recent/{id}', 'NewsController@getListNewsRecent');
     Route::get('/news/get_list_by_category_id/{id}', 'NewsController@getListNewsByCategoryId');
 
+    Route::get('/schools', 'SchoolController@index');
+    Route::get('/schools/all_school', 'SchoolController@all');
+    Route::get('/schools/{id}', 'SchoolController@show');
+
     Route::group(['middleware' => 'jwt.auth',], function () {
         // user
         Route::get('/user/list', 'UserController@getList');
@@ -63,11 +67,8 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('/news/{id}', 'NewsController@update');
 
         // school
-        Route::get('/schools', 'SchoolController@index');
-        Route::get('/schools/all_school', 'SchoolController@all');
         Route::post('/schools', 'SchoolController@store');
         Route::get('/schools/delete/{id}', 'SchoolController@destroy');
-        Route::get('/schools/{id}', 'SchoolController@show');
         Route::post('/schools/{id}', 'SchoolController@update');
 
         // albums

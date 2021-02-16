@@ -39,6 +39,7 @@ class School extends Model
             'content' => $this->content,
             'address' => $this->address,
             'views' => $this->views,
+            'created_at' => $this->created_at
         ];
     }
 }

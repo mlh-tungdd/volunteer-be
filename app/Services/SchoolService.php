@@ -80,7 +80,7 @@ class SchoolService implements SchoolServiceInterface
      */
     public function showSchool($id)
     {
-        return $this->news->findOrFail($id);
+        return $this->news->findOrFail($id)->getSchoolResponse();
     }
 
     /**
