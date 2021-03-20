@@ -19,6 +19,10 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('/auth/login', 'AuthController@login');
     Route::post('/auth/logout', 'AuthController@logout');
 
+    Route::get('/events', 'EventController@index');
+    Route::get('/events/all_event', 'EventController@all');
+    Route::get('/events/{id}', 'EventController@show');
+
     Route::get('/districts', 'DistrictController@index');
     Route::get('/districts/all_district', 'DistrictController@all');
 
@@ -98,11 +102,8 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('/districts/{id}', 'DistrictController@update');
 
         // event
-        Route::get('/events', 'EventController@index');
-        Route::get('/events/all_event', 'EventController@all');
         Route::post('/events', 'EventController@store');
         Route::get('/events/delete/{id}', 'EventController@destroy');
-        Route::get('/events/{id}', 'EventController@show');
         Route::post('/events/{id}', 'EventController@update');
 
         // user profile
