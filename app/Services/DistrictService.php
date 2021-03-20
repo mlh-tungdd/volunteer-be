@@ -2,15 +2,15 @@
 
 namespace App\Services;
 
-use App\Models\Banner;
+use App\Models\District;
 
-class BannerService implements BannerServiceInterface
+class DistrictService implements DistrictServiceInterface
 {
-    protected $banner;
+    protected $district;
 
-    public function __construct(Banner $banner)
+    public function __construct(District $district)
     {
-        $this->banner = $banner;
+        $this->district = $district;
     }
 
     /**
@@ -18,12 +18,12 @@ class BannerService implements BannerServiceInterface
      *
      * @return void
      */
-    public function getListBanner($params)
+    public function getListDistrict($params)
     {
-        $query = $this->banner->orderByDesc('created_at')->paginate();
+        $query = $this->district->orderByDesc('created_at')->paginate();
         return [
             'data' => $query->map(function ($item) {
-                return $item->getBannerResponse();
+                return $item->getDistrictResponse();
             }),
             'per_page' => $query->perPage(),
             'total' => $query->total(),
@@ -37,11 +37,11 @@ class BannerService implements BannerServiceInterface
      *
      * @return void
      */
-    public function getAllBanner($params)
+    public function getAllDistrict($params)
     {
-        $query = $this->banner->orderByDesc('created_at');
+        $query = $this->district->orderByDesc('created_at');
         return $query->get()->map(function ($item) {
-            return $item->getBannerResponse();
+            return $item->getDistrictResponse();
         });
     }
 
@@ -51,12 +51,10 @@ class BannerService implements BannerServiceInterface
      * @param array $params
      * @return void
      */
-    public function createBanner($params)
+    public function createDistrict($params)
     {
-        $this->banner->create([
+        $this->district->create([
             'title' => $params['title'],
-            'url' => $params['url'],
-            'thumbnail' => $params['thumbnail'],
         ]);
     }
 
@@ -66,9 +64,9 @@ class BannerService implements BannerServiceInterface
      * @param $id
      * @return void
      */
-    public function deleteBanner($id)
+    public function deleteDistrict($id)
     {
-        $this->banner->findOrFail($id)->delete();
+        $this->district->findOrFail($id)->delete();
     }
 
     /**
@@ -77,9 +75,9 @@ class BannerService implements BannerServiceInterface
      * @param $id
      * @return void
      */
-    public function showBanner($id)
+    public function showDistrict($id)
     {
-        return $this->banner->findOrFail($id)->getBannerResponse();
+        return $this->district->findOrFail($id);
     }
 
     /**
@@ -88,8 +86,8 @@ class BannerService implements BannerServiceInterface
      * @param array $params
      * @return void
      */
-    public function updateBanner($params)
+    public function updateDistrict($params)
     {
-        $this->banner->findOrFail($params['id'])->update($params);
+        $this->district->findOrFail($params['id'])->update($params);
     }
 }

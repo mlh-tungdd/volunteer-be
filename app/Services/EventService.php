@@ -2,15 +2,15 @@
 
 namespace App\Services;
 
-use App\Models\Banner;
+use App\Models\Event;
 
-class BannerService implements BannerServiceInterface
+class EventService implements EventServiceInterface
 {
-    protected $banner;
+    protected $event;
 
-    public function __construct(Banner $banner)
+    public function __construct(Event $event)
     {
-        $this->banner = $banner;
+        $this->event = $event;
     }
 
     /**
@@ -18,12 +18,12 @@ class BannerService implements BannerServiceInterface
      *
      * @return void
      */
-    public function getListBanner($params)
+    public function getListEvent($params)
     {
-        $query = $this->banner->orderByDesc('created_at')->paginate();
+        $query = $this->event->orderByDesc('created_at')->paginate();
         return [
             'data' => $query->map(function ($item) {
-                return $item->getBannerResponse();
+                return $item->getEventResponse();
             }),
             'per_page' => $query->perPage(),
             'total' => $query->total(),
@@ -37,11 +37,11 @@ class BannerService implements BannerServiceInterface
      *
      * @return void
      */
-    public function getAllBanner($params)
+    public function getAllEvent($params)
     {
-        $query = $this->banner->orderByDesc('created_at');
+        $query = $this->event->orderByDesc('created_at');
         return $query->get()->map(function ($item) {
-            return $item->getBannerResponse();
+            return $item->getEventResponse();
         });
     }
 
@@ -51,11 +51,12 @@ class BannerService implements BannerServiceInterface
      * @param array $params
      * @return void
      */
-    public function createBanner($params)
+    public function createEvent($params)
     {
-        $this->banner->create([
+        $this->event->create([
             'title' => $params['title'],
-            'url' => $params['url'],
+            'description' => $params['description'],
+            'content' => $params['content'],
             'thumbnail' => $params['thumbnail'],
         ]);
     }
@@ -66,9 +67,9 @@ class BannerService implements BannerServiceInterface
      * @param $id
      * @return void
      */
-    public function deleteBanner($id)
+    public function deleteEvent($id)
     {
-        $this->banner->findOrFail($id)->delete();
+        $this->event->findOrFail($id)->delete();
     }
 
     /**
@@ -77,9 +78,9 @@ class BannerService implements BannerServiceInterface
      * @param $id
      * @return void
      */
-    public function showBanner($id)
+    public function showEvent($id)
     {
-        return $this->banner->findOrFail($id)->getBannerResponse();
+        return $this->event->findOrFail($id)->getEventResponse();
     }
 
     /**
@@ -88,8 +89,8 @@ class BannerService implements BannerServiceInterface
      * @param array $params
      * @return void
      */
-    public function updateBanner($params)
+    public function updateEvent($params)
     {
-        $this->banner->findOrFail($params['id'])->update($params);
+        $this->event->findOrFail($params['id'])->update($params);
     }
 }

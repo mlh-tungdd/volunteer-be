@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\AlbumImage;
+use App\Models\Event;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class AlbumImageFactory extends Factory
+class EventFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = AlbumImage::class;
+    protected $model = Event::class;
 
     /**
      * Define the model's default state.
@@ -21,11 +21,11 @@ class AlbumImageFactory extends Factory
      */
     public function definition()
     {
-        $albums = \App\Models\Album::get()->pluck('id')->toArray();
         return [
             'title' => $this->faker->sentence(6, true),
             'thumbnail' => 'https://fakeimg.pl/1920x1080/?text=' . $this->faker->word,
-            'album_id' => $this->faker->randomElement($albums),
+            'description' => $this->faker->text(200),
+            'content' => $this->faker->text(200),
         ];
     }
 }

@@ -15,4 +15,6 @@ interface SchoolServiceInterface
     public function showSchool($id);
 
     public function updateSchool($params);
+
+    public function getListSchoolByDistrictId($districtId);
 }

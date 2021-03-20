@@ -52,6 +52,16 @@ class AppServiceProvider extends ServiceProvider
             \App\Services\VideoServiceInterface::class,
             \App\Services\VideoService::class
         );
+
+        $this->app->singleton(
+            \App\Services\DistrictServiceInterface::class,
+            \App\Services\DistrictService::class
+        );
+
+        $this->app->singleton(
+            \App\Services\EventServiceInterface::class,
+            \App\Services\EventService::class
+        );
     }
 
     /**

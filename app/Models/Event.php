@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class School extends Model
+class Event extends Model
 {
     use HasFactory;
 
-    protected $table = 'schools';
+    protected $table = 'events';
 
     protected $perPage = 10;
 
@@ -22,35 +22,22 @@ class School extends Model
         'title',
         'description',
         'content',
-        'address',
-        'views',
-        'district_id',
+        'thumbnail',
     ];
-
-    /**
-     * Relationship
-     */
-    public function districts()
-    {
-        return $this->belongsTo(District::class, 'district_id');
-    }
 
     /**
      * response
      *
      */
-    public function getSchoolResponse()
+    public function getEventResponse()
     {
         return [
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
             'content' => $this->content,
-            'address' => $this->address,
-            'views' => $this->views,
-            'district_id' => $this->district_id,
-            'created_at' => $this->created_at,
-            'district_name' => $this->districts->title ?? null,
+            'thumbnail' => $this->thumbnail,
+            'created_at' => $this->created_at
         ];
     }
 }

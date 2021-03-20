@@ -4,24 +4,24 @@ namespace App\Http\Controllers\Api;
 
 use Exception;
 use Illuminate\Http\Request;
-use App\Models\School;
-use App\Http\Requests\SchoolRequest;
-use App\Services\SchoolServiceInterface;
+use App\Models\District;
+use App\Http\Requests\DistrictRequest;
+use App\Services\DistrictServiceInterface;
 
-class SchoolController extends ApiController
+class DistrictController extends ApiController
 {
-    protected $schoolService;
+    protected $districtService;
     protected $response;
 
     /**
      * construct function
      *
-     * @param SchoolServiceInterface $banner
+     * @param DistrictServiceInterface $district
      * @param ApiResponse $response
      */
-    public function __construct(SchoolServiceInterface $schoolService, ApiResponse $response)
+    public function __construct(DistrictServiceInterface $districtService, ApiResponse $response)
     {
-        $this->schoolService = $schoolService;
+        $this->districtService = $districtService;
         $this->response = $response;
     }
 
@@ -32,7 +32,7 @@ class SchoolController extends ApiController
      */
     public function index(Request $request)
     {
-        $list = $this->schoolService->getListSchool($request->all());
+        $list = $this->districtService->getListDistrict($request->all());
         return $this->response->withData($list);
     }
 
@@ -43,7 +43,7 @@ class SchoolController extends ApiController
      */
     public function all(Request $request)
     {
-        $list = $this->schoolService->getAllSchool($request->all());
+        $list = $this->districtService->getAllDistrict($request->all());
         return $this->response->withData($list);
     }
 
@@ -53,15 +53,11 @@ class SchoolController extends ApiController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SchoolRequest $request)
+    public function store(DistrictRequest $request)
     {
         try {
-            $this->schoolService->createSchool([
+            $this->districtService->createDistrict([
                 'title' => $request->title,
-                'description' => $request->description,
-                'content' => $request->content,
-                'address' => $request->address,
-                'district_id' => $request->district_id
             ]);
             return $this->response->withCreated();
         } catch (Exception $ex) {
@@ -72,32 +68,28 @@ class SchoolController extends ApiController
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Models\School  $banner
+     * @param  \App\Models\Models\District  $district
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $banner = $this->schoolService->showSchool($id);
-        return $this->response->withData($banner);
+        $district = $this->districtService->showDistrict($id);
+        return $this->response->withData($district);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Models\School  $banner
+     * @param  \App\Models\Models\District  $district
      * @return \Illuminate\Http\Response
      */
-    public function update(SchoolRequest $request, $id)
+    public function update(DistrictRequest $request, $id)
     {
         try {
-            $this->schoolService->updateSchool([
+            $this->districtService->updateDistrict([
                 'id' => $id,
                 'title' => $request->title,
-                'description' => $request->description,
-                'content' => $request->content,
-                'address' => $request->address,
-                'district_id' => $request->district_id,
             ]);
             return $this->response->withMessage('Update successful');
         } catch (Exception $ex) {
@@ -108,25 +100,16 @@ class SchoolController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Models\School  $banner
+     * @param  \App\Models\Models\District  $district
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         try {
-            $this->schoolService->deleteSchool($id);
+            $this->districtService->deleteDistrict($id);
             return $this->response->withMessage('Delete successful');
         } catch (Exception $ex) {
             return $this->response->errorWrongArgs($ex->getMessage());
         }
-    }
-
-    /**
-     * Get news by district_id
-     */
-    public function getListSchoolByDistrictId($districtId)
-    {
-        $list = $this->schoolService->getListSchoolByDistrictId($districtId);
-        return $this->response->withData($list);
     }
 }

@@ -23,7 +23,7 @@ class BannerFactory extends Factory
     {
         return [
             'title' => $this->faker->sentence(6, true),
-            'thumbnail' => 'https://fakeimg.pl/700x400/?text=' . $this->faker->word,
+            'thumbnail' => 'https://fakeimg.pl/1920x1080/?text=' . $this->faker->word,
             'url' => $this->faker->url,
         ];
     }

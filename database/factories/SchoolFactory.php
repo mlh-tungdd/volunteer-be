@@ -21,12 +21,14 @@ class SchoolFactory extends Factory
      */
     public function definition()
     {
+        $districts = \App\Models\District::get()->pluck('id')->toArray();
         return [
             'title' => $this->faker->sentence(6, true),
             'description' => $this->faker->text(200),
             'content' => $this->faker->text(200),
             'address' => $this->faker->address,
             'views' => $this->faker->numberBetween(0, 100),
+            'district_id' => $this->faker->randomElement($districts),
         ];
     }
 }

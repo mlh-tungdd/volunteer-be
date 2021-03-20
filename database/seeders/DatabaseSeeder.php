@@ -13,6 +13,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call([
+            UserSeeder::class,
+            DistrictSeeder::class
+        ]);
         \App\Models\User::factory(10)->create();
         \App\Models\CategoryNews::factory(10)->create();
         \App\Models\News::factory(10)->create();
@@ -24,8 +28,6 @@ class DatabaseSeeder extends Seeder
         \App\Models\Contact::factory(10)->create();
         \App\Models\Setting::factory(1)->create();
         \App\Models\Banner::factory(10)->create();
-        $this->call([
-            UserSeeder::class,
-        ]);
+        \App\Models\Event::factory(10)->create();
     }
 }

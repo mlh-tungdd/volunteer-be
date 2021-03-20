@@ -3,14 +3,17 @@
 namespace App\Services;
 
 use App\Models\School;
+use App\Models\District;
 
 class SchoolService implements SchoolServiceInterface
 {
-    protected $news;
+    protected $school;
+    protected $district;
 
-    public function __construct(School $news)
+    public function __construct(School $school, District $district)
     {
-        $this->news = $news;
+        $this->school = $school;
+        $this->district = $district;
     }
 
     /**
@@ -20,7 +23,7 @@ class SchoolService implements SchoolServiceInterface
      */
     public function getListSchool($params)
     {
-        $query = $this->news->orderByDesc('created_at')->paginate();
+        $query = $this->school->orderByDesc('created_at')->paginate();
         return [
             'data' => $query->map(function ($item) {
                 return $item->getSchoolResponse();
@@ -39,7 +42,7 @@ class SchoolService implements SchoolServiceInterface
      */
     public function getAllSchool($params)
     {
-        $query = $this->news->orderByDesc('created_at');
+        $query = $this->school->orderByDesc('created_at');
         return $query->get()->map(function ($item) {
             return $item->getSchoolResponse();
         });
@@ -53,7 +56,7 @@ class SchoolService implements SchoolServiceInterface
      */
     public function createSchool($params)
     {
-        $this->news->create([
+        $this->school->create([
             'title' => $params['title'],
             'description' => $params['description'],
             'content' => $params['content'],
@@ -69,7 +72,7 @@ class SchoolService implements SchoolServiceInterface
      */
     public function deleteSchool($id)
     {
-        $this->news->findOrFail($id)->delete();
+        $this->school->findOrFail($id)->delete();
     }
 
     /**
@@ -80,7 +83,7 @@ class SchoolService implements SchoolServiceInterface
      */
     public function showSchool($id)
     {
-        return $this->news->findOrFail($id)->getSchoolResponse();
+        return $this->school->findOrFail($id)->getSchoolResponse();
     }
 
     /**
@@ -91,6 +94,26 @@ class SchoolService implements SchoolServiceInterface
      */
     public function updateSchool($params)
     {
-        $this->news->findOrFail($params['id'])->update($params);
+        $this->school->findOrFail($params['id'])->update($params);
+    }
+
+    /**
+     * get list by district_id
+     *
+     * @return void
+     */
+    public function getListSchoolByDistrictId($districtId)
+    {
+        $query = $this->school->with(['districts'])->where('district_id', $districtId)->orderByDesc('created_at')->paginate();
+        return [
+            'data' => $query->map(function ($item) {
+                return $item->getSchoolResponse();
+            }),
+            'per_page' => $query->perPage(),
+            'total' => $query->total(),
+            'current_page' => $query->currentPage(),
+            'last_page' => $query->lastPage(),
+            'district' => $this->district->findOrFail($districtId)
+        ];
     }
 }

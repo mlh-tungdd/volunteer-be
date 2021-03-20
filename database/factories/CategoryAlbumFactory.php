@@ -22,7 +22,7 @@ class CategoryAlbumFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->sentence(6, true),
+            'title' => $this->faker->sentence(3, true),
         ];
     }
 }

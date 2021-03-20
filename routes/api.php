@@ -19,6 +19,9 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('/auth/login', 'AuthController@login');
     Route::post('/auth/logout', 'AuthController@logout');
 
+    Route::get('/districts', 'DistrictController@index');
+    Route::get('/districts/all_district', 'DistrictController@all');
+
     Route::get('/banners', 'BannerController@index');
     Route::get('/banners/all_banner', 'BannerController@all');
 
@@ -35,6 +38,7 @@ Route::group(['namespace' => 'Api'], function () {
     Route::get('/schools', 'SchoolController@index');
     Route::get('/schools/all_school', 'SchoolController@all');
     Route::get('/schools/{id}', 'SchoolController@show');
+    Route::get('/schools/get_list_by_district_id/{id}', 'SchoolController@getListSchoolByDistrictId');
 
     Route::group(['middleware' => 'jwt.auth',], function () {
         // user
@@ -86,6 +90,20 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('/videos/delete/{id}', 'VideoController@destroy');
         Route::get('/videos/{id}', 'VideoController@show');
         Route::post('/videos/{id}', 'VideoController@update');
+
+        // district
+        Route::post('/districts', 'DistrictController@store');
+        Route::get('/districts/delete/{id}', 'DistrictController@destroy');
+        Route::get('/districts/{id}', 'DistrictController@show');
+        Route::post('/districts/{id}', 'DistrictController@update');
+
+        // event
+        Route::get('/events', 'EventController@index');
+        Route::get('/events/all_event', 'EventController@all');
+        Route::post('/events', 'EventController@store');
+        Route::get('/events/delete/{id}', 'EventController@destroy');
+        Route::get('/events/{id}', 'EventController@show');
+        Route::post('/events/{id}', 'EventController@update');
 
         // user profile
         Route::get('/user/show_profile', 'UserController@showProfile');
