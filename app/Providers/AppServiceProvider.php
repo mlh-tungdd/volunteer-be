@@ -62,6 +62,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Services\EventServiceInterface::class,
             \App\Services\EventService::class
         );
+
+        $this->app->singleton(
+            \App\Services\SettingServiceInterface::class,
+            \App\Services\SettingService::class
+        );
     }
 
     /**

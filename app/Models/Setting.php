@@ -11,15 +11,12 @@ class Setting extends Model
 
     protected $table = 'settings';
 
-    protected $perPage = 10;
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'title',
         'description',
         'content',
         'favicon',
@@ -28,4 +25,20 @@ class Setting extends Model
         'hotline',
         'email',
     ];
+
+    /**
+     * response
+     *
+     */
+    public function getSettingResponse()
+    {
+        return [
+            'email' => $this->email,
+            'hotline' => $this->hotline,
+            'address' => $this->address,
+            'logo' => $this->logo,
+            'content' => $this->content,
+            'description' => $this->description,
+        ];
+    }
 }

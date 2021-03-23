@@ -19,6 +19,8 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('/auth/login', 'AuthController@login');
     Route::post('/auth/logout', 'AuthController@logout');
 
+    Route::get('/settings/{id}', 'SettingController@show');
+
     Route::get('/events', 'EventController@index');
     Route::get('/events/all_event', 'EventController@all');
     Route::get('/events/{id}', 'EventController@show');
@@ -106,8 +108,10 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('/events/delete/{id}', 'EventController@destroy');
         Route::post('/events/{id}', 'EventController@update');
 
+        // settings
+        Route::post('/settings/{id}', 'SettingController@update');
+
         // user profile
-        Route::get('/user/show_profile', 'UserController@showProfile');
         Route::post('/user/edit_profile', 'UserController@editProfile');
         Route::post('/user/change_password_profile', 'UserController@changePasswordProfile');
     });
