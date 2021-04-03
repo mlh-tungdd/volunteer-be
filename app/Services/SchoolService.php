@@ -61,6 +61,7 @@ class SchoolService implements SchoolServiceInterface
             'description' => $params['description'],
             'content' => $params['content'],
             'address' => $params['address'],
+            'district_id' => $params['district_id'],
         ]);
     }
 
