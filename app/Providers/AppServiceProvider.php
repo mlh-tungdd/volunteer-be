@@ -67,6 +67,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Services\SettingServiceInterface::class,
             \App\Services\SettingService::class
         );
+
+        $this->app->singleton(
+            \App\Services\DonationServiceInterface::class,
+            \App\Services\DonationService::class
+        );
     }
 
     /**

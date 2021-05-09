@@ -29,5 +29,6 @@ class DatabaseSeeder extends Seeder
         \App\Models\Setting::factory(1)->create();
         \App\Models\Banner::factory(10)->create();
         \App\Models\Event::factory(10)->create();
+        \App\Models\Donation::factory(10)->create();
     }
 }

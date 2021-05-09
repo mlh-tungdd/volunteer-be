@@ -19,6 +19,15 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('/auth/login', 'AuthController@login');
     Route::post('/auth/logout', 'AuthController@logout');
 
+    // donations
+    Route::get('/donations', 'DonationController@index');
+    Route::get('/donations/all_donations', 'DonationController@all');
+    Route::post('/donations', 'DonationController@store');
+    Route::get('/donations/delete/{id}', 'DonationController@destroy');
+    Route::get('/donations/{id}', 'DonationController@show');
+    Route::post('/donations/{id}', 'DonationController@update');
+    Route::patch('/donations/{id}', 'DonationController@updateStatus');
+
     Route::get('/settings/{id}', 'SettingController@show');
 
     Route::get('/events', 'EventController@index');
