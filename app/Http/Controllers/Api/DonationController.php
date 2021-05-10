@@ -26,6 +26,15 @@ class DonationController extends ApiController
     }
 
     /**
+     * Lấy danh sách quyên góp của bản thân
+     */
+    public function getListDonationByUser()
+    {
+        $list = $this->donationService->getListDonationByUser();
+        return $this->response->withData($list);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

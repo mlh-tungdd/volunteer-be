@@ -26,7 +26,7 @@ class DonationFactory extends Factory
             'title' => $this->faker->sentence(3, true),
             'description' => $this->faker->text(200),
             'content' => $this->faker->text(200),
-            'status' => 0,
+            'status' => 1,
             'tags' => '',
             'user_id' => $this->faker->randomElement($users),
         ];

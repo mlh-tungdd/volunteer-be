@@ -65,7 +65,7 @@ class DonationService implements DonationServiceInterface
             'title' => $params['title'],
             'description' => $params['description'],
             'content' => $params['content'],
-            'status' => $params['status'],
+            'status' => 0,
             'tags' => $params['tags'],
             'user_id' => JWTAuth::user()->id,
         ]);
@@ -102,5 +102,23 @@ class DonationService implements DonationServiceInterface
     public function updateDonation($params)
     {
         $this->donation->findOrFail($params['id'])->update($params);
+    }
+
+    /**
+     * Lấy danh sách quyên góp của bản thân
+     */
+    public function getListDonationByUser()
+    {
+        $query = $this->donation->where('user_id', JWTAuth::user()->id)->orderByDesc('created_at')->paginate();
+
+        return [
+            'data' => $query->map(function ($item) {
+                return $item->getDonationResponse();
+            }),
+            'per_page' => $query->perPage(),
+            'total' => $query->total(),
+            'current_page' => $query->currentPage(),
+            'last_page' => $query->lastPage(),
+        ];
     }
 }

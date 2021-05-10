@@ -4,6 +4,8 @@ namespace App\Services;
 
 interface DonationServiceInterface
 {
+    public function getListDonationByUser();
+
     public function getListDonation($params);
 
     public function getAllDonation($params);

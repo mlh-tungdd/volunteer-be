@@ -19,13 +19,21 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('/auth/login', 'AuthController@login');
     Route::post('/auth/logout', 'AuthController@logout');
 
+    // order
+    Route::get('/my_oders/{donationId}/{userId}', 'OrderController@getListOrderByDonationId');
+    Route::get('/orders', 'OrderController@index');
+    Route::get('/orders/all_order', 'OrderController@all');
+    Route::post('/orders', 'OrderController@store');
+    Route::get('/orders/delete/{id}', 'OrderController@destroy');
+    Route::get('/orders/{id}', 'OrderController@show');
+    Route::post('/orders/{id}', 'OrderController@update');
+
     // donations
     Route::get('/donations', 'DonationController@index');
     Route::get('/donations/all_donations', 'DonationController@all');
-    Route::post('/donations', 'DonationController@store');
+    Route::post('/donations/{id}', 'DonationController@update');
     Route::get('/donations/delete/{id}', 'DonationController@destroy');
     Route::get('/donations/{id}', 'DonationController@show');
-    Route::post('/donations/{id}', 'DonationController@update');
     Route::patch('/donations/{id}', 'DonationController@updateStatus');
 
     Route::get('/settings/{id}', 'SettingController@show');
@@ -56,10 +64,13 @@ Route::group(['namespace' => 'Api'], function () {
     Route::get('/schools/get_list_by_district_id/{id}', 'SchoolController@getListSchoolByDistrictId');
 
     Route::group(['middleware' => 'jwt.auth',], function () {
+        Route::post('/donations', 'DonationController@store');
+        Route::get('/my_donation', 'DonationController@getListDonationByUser');
         // user
         Route::get('/user/list', 'UserController@getList');
         Route::get('/user/delete/{id}', 'UserController@delete');
         Route::get('/user/info', 'UserController@showProfile');
+
 
         // banner
         Route::post('/banners', 'BannerController@store');
