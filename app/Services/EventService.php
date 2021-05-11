@@ -47,7 +47,7 @@ class EventService implements EventServiceInterface
      */
     public function getAllEvent($params)
     {
-        $query = $this->event->orderByDesc('created_at');
+        $query = $this->event->where('donate_id', null)->orderByDesc('created_at');
         return $query->get()->map(function ($item) {
             return $item->getEventResponse();
         });
