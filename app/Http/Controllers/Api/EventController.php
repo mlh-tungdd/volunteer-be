@@ -142,4 +142,20 @@ class EventController extends ApiController
             return $this->response->errorWrongArgs($ex->getMessage());
         }
     }
+
+    /**
+     * Update donate_id when add new donate
+     */
+    public function updateDonateId(Request $request, $id)
+    {
+        try {
+            $this->eventService->updateEvent([
+                'id' => $id,
+                'donate_id' => $request->donate_id,
+            ]);
+            return $this->response->withMessage('Update successful');
+        } catch (Exception $ex) {
+            return $this->response->errorWrongArgs($ex->getMessage());
+        }
+    }
 }

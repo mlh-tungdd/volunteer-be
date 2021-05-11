@@ -23,6 +23,7 @@ class Event extends Model
         'description',
         'content',
         'thumbnail',
+        'donate_id'
     ];
 
     /**
@@ -37,7 +38,8 @@ class Event extends Model
             'description' => $this->description,
             'content' => $this->content,
             'thumbnail' => $this->thumbnail,
-            'created_at' => $this->created_at
+            'created_at' => $this->created_at,
+            'donate_id' => $this->donate_id,
         ];
     }
 }

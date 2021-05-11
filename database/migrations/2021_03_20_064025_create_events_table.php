@@ -19,6 +19,7 @@ class CreateEventsTable extends Migration
             $table->text('description')->nullable();
             $table->text('content')->nullable();
             $table->string('thumbnail')->nullable();
+            $table->integer('donate_id')->nullable();
             $table->timestamps();
         });
     }

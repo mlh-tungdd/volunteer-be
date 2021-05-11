@@ -41,6 +41,7 @@ Route::group(['namespace' => 'Api'], function () {
     Route::get('/events', 'EventController@index');
     Route::get('/events/all_event', 'EventController@all');
     Route::get('/events/{id}', 'EventController@show');
+    Route::patch('/update_donate_event/{id}', 'EventController@updateDonateId');
 
     Route::get('/districts', 'DistrictController@index');
     Route::get('/districts/all_district', 'DistrictController@all');
