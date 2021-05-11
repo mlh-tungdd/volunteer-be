@@ -20,7 +20,19 @@ class AlbumService implements AlbumServiceInterface
      */
     public function getListAlbum($params)
     {
-        $query = $this->album->with(['categoryAlbum'])->orderByDesc('created_at')->paginate();
+        $query = $this->album->with(['categoryAlbum'])->orderByDesc('created_at');
+        $title = $params['title'] ?? null;
+        $categoryAlbumId = $params['category_album_id'] ?? null;
+
+        if ($title != null) {
+            $query->where('title', 'like', '%' . $title . '%');
+        }
+        if ($categoryAlbumId != null) {
+            $query->where('category_album_id', $categoryAlbumId);
+        }
+
+        $query = $query->paginate();
+
         return [
             'data' => $query->map(function ($item) {
                 return $item->getAlbumResponse();

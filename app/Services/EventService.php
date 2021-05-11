@@ -20,7 +20,15 @@ class EventService implements EventServiceInterface
      */
     public function getListEvent($params)
     {
-        $query = $this->event->orderByDesc('created_at')->paginate();
+        $query = $this->event->orderByDesc('created_at');
+        $title = $params['title'] ?? null;
+
+        if ($title != null) {
+            $query->where('title', 'like', '%' . $title . '%');
+        }
+
+        $query = $query->paginate();
+
         return [
             'data' => $query->map(function ($item) {
                 return $item->getEventResponse();

@@ -20,7 +20,15 @@ class VideoService implements VideoServiceInterface
      */
     public function getListVideo($params)
     {
-        $query = $this->video->orderByDesc('created_at')->paginate();
+        $query = $this->video->orderByDesc('created_at');
+        $title = $params['title'] ?? null;
+
+        if ($title != null) {
+            $query->where('title', 'like', '%' . $title . '%');
+        }
+
+        $query = $query->paginate();
+
         return [
             'data' => $query->map(function ($item) {
                 return $item->getVideoResponse();

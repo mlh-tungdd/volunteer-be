@@ -23,7 +23,19 @@ class SchoolService implements SchoolServiceInterface
      */
     public function getListSchool($params)
     {
-        $query = $this->school->orderByDesc('created_at')->paginate();
+        $query = $this->school->orderByDesc('created_at');
+        $title = $params['title'] ?? null;
+        $address = $params['address'] ?? null;
+
+        if ($title != null) {
+            $query->where('title', 'like', '%' . $title . '%');
+        }
+        if ($address != null) {
+            $query->where('address', 'like', '%' . $address . '%');
+        }
+
+        $query = $query->paginate();
+
         return [
             'data' => $query->map(function ($item) {
                 return $item->getSchoolResponse();
